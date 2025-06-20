@@ -1,1 +1,25 @@
+# Ігнорування Terraform артефактів
 .terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+terraform.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Логи Terraform планів
+*.log
+*.backup
+
+# Ігнорування локального плану
+plan.out
+
+# Python virtual environments (якщо будеш використовувати)
+.venv/
+.venvs/
+
+# macOS/Windows системні файли
+.DS_Store
+Thumbs.db
