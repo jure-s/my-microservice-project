@@ -1,20 +1,19 @@
-# Використовуємо офіційний образ Python 3.11
 FROM python:3.11-slim
 
-# Встановлюємо робочу директорію всередині контейнера
+# Встановлення системних залежностей
+RUN apt-get update && \
+    apt-get install -y gcc libpq-dev && \
+    pip install --upgrade pip
+
+# Робоча директорія
 WORKDIR /app
 
-# Копіюємо файл залежностей до контейнера
+# Копіюємо requirements.txt та встановлюємо залежності
 COPY requirements.txt .
-
-# Встановлюємо залежності
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копіюємо всі файли проєкту до контейнера
+# Копіюємо весь проєкт
 COPY . .
 
-# Відкриваємо порт 8000 (Django за замовчуванням)
-EXPOSE 8000
-
-# Команда запуску Django-сервера (можеш змінити на gunicorn у продакшн)
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Вказуємо команду запуску
+CMD ["gunicorn", "myproject.wsgi:application", "--bind", "0.0.0.0:8000"]

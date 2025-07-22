@@ -1,0 +1,32 @@
+image:
+  repository: 658428669098.dkr.ecr.us-east-1.amazonaws.com/django-app-v2
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: LoadBalancer
+  port: 80
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70
+
+env:
+  DJANGO_SECRET_KEY: "changeme-in-prod"
+  DEBUG: "False"
+  ALLOWED_HOSTS: "*"
+  DB_HOST: "django-rds.cs96mso2kssv.us-east-1.rds.amazonaws.com"
+  DB_PORT: "5432"
+  DB_NAME: "mydb"
+  DB_USER: "postgres"
+  DB_PASSWORD: "postgres12345"
