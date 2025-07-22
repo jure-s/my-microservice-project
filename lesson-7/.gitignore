@@ -1,0 +1,24 @@
+# Terraform state
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+# Crash log files
+crash.log
+
+# Terraform plan output
+*.tfplan
+
+# Sensitive variable files
+*.tfvars
+
+# Editor/IDE files
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+
+# Helm output
+*.tgz
